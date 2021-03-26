@@ -1,3 +1,3 @@
-TITLE_BASICS = "data/title.basics.tsv.gz"
+TITLE_BASICS = "data/title.basics.tsv"
 
-TITLE_CREW = "data/title.crew.tsv.gz"
+TITLE_CREW = "data/title.crew.tsv"
