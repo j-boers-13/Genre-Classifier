@@ -14,11 +14,14 @@ def get_features_labels(data):
     return
 
 def main():
-    df = pd.read_csv(TITLE_BASICS,sep='\t')
-    df2 = df[df.titleType == 'movie']
-    print(df2)
-    #data1 = pd.read_csv('title.crew.csv',sep='\t')
-    #print(data1)    
+    df_genre = pd.read_csv(TITLE_BASICS,sep='\t')
+    df_genre2 = df_genre[df_genre.titleType == 'movie']
+    df_genre2 = df_genre2[df_genre.genres != '\\N']
+    #print(df_genre2)
+    df_crew = pd.read_csv('title.crew.tsv',sep='\t')
+    #print(df_crew)
+    df_merged = pd.merge(left=df_genre2, right=df_crew, left_on='tconst', right_on='tconst')
+    print(df_merged)
     return
 
 if __name__ == "__main__":
