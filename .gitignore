@@ -1,0 +1,4 @@
+data/name.basics.tsv.gz
+data/title.basics.tsv.gz
+data/title.crew.tsv.gz
+__pycache__/constants.cpython-38.pyc
