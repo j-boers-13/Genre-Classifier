@@ -51,10 +51,8 @@ def main():
     # feature_samples = []
     # # List of labels per movie
     # labels = []
-    label_encoder = LabelEncoder()
-    df_merged['writers'] = label_encoder.fit_transform(df_merged['writers'])
     one_hot_encoder = OneHotEncoder(categories='auto')
-    feature_arr = one_hot_encoder.fit_transform(df_merged[['writers']])
+    features = one_hot_encoder.fit_transform(df_merged[['writers']])
     feature_labels = one_hot_encoder.categories_
     # print(feature_labels)
     # for _, row in df_merged.iterrows():
