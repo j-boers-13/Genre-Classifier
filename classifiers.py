@@ -41,34 +41,19 @@ def main():
 
     df_merged_full = pd.merge(left=df_genre, right=df_crew, left_on='tconst', right_on='tconst')
     df_merged = df_merged_full.sample(frac=0.5)
-    # Writers and directors are a string with multiple actors/directors split by a comma
-    # So first turn them into lists
+    # Split genres
     df_merged['genres'] = df_merged['genres'].apply(lambda x: x.split(','))
     df_merged = df_merged.explode('genres').fillna('')
     print(df_merged.head(5))
 
-    # # List of features per movie
-    # feature_samples = []
-    # # List of labels per movie
-    # labels = []
+    # Get one hot encoded sparse-matrix
     one_hot_encoder = OneHotEncoder(categories='auto')
-    features = one_hot_encoder.fit_transform(df_merged[['writers']])
-    feature_labels = one_hot_encoder.categories_
-    # print(feature_labels)
-    # for _, row in df_merged.iterrows():
-    #     for genre in row['genres'].split(','):
-    #         labels.append(genre)
-    #         features = row['writers'].split(',').extend(row['directors'].split(','))
-    #         feature_samples.append(features)
+    feature_matrix = one_hot_encoder.fit_transform(df_merged[['writers','directors']])
+    
+    # Get list of genres per observation
+    labels = df_merged['genres'].tolist()    
 
-    # train_features, test_features = split_train_test(feature_samples)
-    # train_labels, train_features = split_train_test(labels)
-
-    # mlb = MultiLabelBinarizer()
-
-    # le = LabelEncoder()
-    # le.fit(feature_samples)
-    # print(le.classes_)
+    train_svm(feature_matrix, labels)
 
 
 if __name__ == "__main__":
