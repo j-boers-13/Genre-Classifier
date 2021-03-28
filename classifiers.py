@@ -40,10 +40,14 @@ def main():
     df_crew = pd.read_csv('data/title.crew.tsv',sep='\t')
 
     df_merged_full = pd.merge(left=df_genre, right=df_crew, left_on='tconst', right_on='tconst')
+
+    # Random sample half of the data
     df_merged = df_merged_full.sample(frac=0.5)
-    # Split genres
+    # Split genre string into array
     df_merged['genres'] = df_merged['genres'].apply(lambda x: x.split(','))
+    # Create a row per genre
     df_merged = df_merged.explode('genres').fillna('')
+    # Preview data to see if 1 genre per row
     print(df_merged.head(5))
 
     # Get one hot encoded sparse-matrix
@@ -53,6 +57,7 @@ def main():
     # Get list of genres per observation
     labels = df_merged['genres'].tolist()    
 
+    # Train SVM model
     train_svm(feature_matrix, labels)
 
 
