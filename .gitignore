@@ -4,3 +4,11 @@ data/title.crew.tsv.gz
 *.pyc
 data/title.basics.tsv
 data/title.crew.tsv
+data/archive.zip
+data/movies_initial.csv
+data/movies_metadata.csv
+data/movies_metadata.csv.zip
+gbm_confusion_matrix.png
+gbm.pickle.dat
+svm.pickle.dat
+svm_confusion_matrix.png
